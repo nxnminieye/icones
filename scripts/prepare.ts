@@ -1,6 +1,8 @@
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import fs from 'fs-extra'
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const out = path.resolve(__dirname, '../public')
 
 function ObjectPick(source: Record<string, any>, keys: string[]) {
@@ -35,7 +37,7 @@ async function prepareJSON() {
     const icons = Object.keys(setData.icons)
     const categories = setData.categories
     const meta = { ...info, icons, categories }
-    const rawFilePath = path.join(collectionsDir, `${info.id}-raw.json`)
+    const rawFilePath = path.join(collectionsDir, `${info.id}.json`)
     const metaFilePath = path.join(collectionsDir, `${info.id}-meta.json`)
 
     await fs.writeJSON(rawFilePath, setData)
@@ -45,9 +47,15 @@ async function prepareJSON() {
     info.sampleIcons = icons.slice(0, 9)
     if (info.id === 'logos') {
       info.sampleIcons = [
-        'vue', 'vitejs', 'vitest', 'rollupjs',
-        'github-icon', 'eslint', 'esbuild',
-        'typescript-icon', 'netlify-icon',
+        'vue',
+        'vitejs',
+        'vitest',
+        'rollupjs',
+        'github-icon',
+        'eslint',
+        'esbuild',
+        'typescript-icon',
+        'netlify-icon',
       ]
     }
     // non-square icons

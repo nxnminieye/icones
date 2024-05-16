@@ -15,8 +15,8 @@ export type PresentType = 'favorite' | 'recent' | 'normal'
 export interface CollectionInfo {
   id: string
   name: string
-  author?: { name: string; url: string }
-  license?: { title: string; url: string }
+  author?: { name: string, url: string }
+  license?: { title: string, url: string }
   url?: string
   sampleIcons?: string[]
   category?: string
@@ -121,7 +121,7 @@ export async function downloadAndInstall(id: string) {
   if (installed.value.includes(id))
     return true
 
-  const data = Object.freeze(await fetch(`${staticPath}/collections/${id}-raw.json`).then(r => r.json()))
+  const data = Object.freeze(await fetch(`${staticPath}/collections/${id}.json`).then(r => r.json()))
 
   addCollection(data)
   installed.value.push(id)
