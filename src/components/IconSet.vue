@@ -58,6 +58,7 @@ async function copyText(text?: string) {
 }
 
 async function onSelect(icon: string) {
+  window.parent?.postMessage({ icon: await getIconSnippet(icon, 'id', true) || icon }, '*')
   switch (activeMode.value) {
     case 'select':
       toggleBag(icon)
