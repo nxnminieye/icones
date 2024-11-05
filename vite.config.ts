@@ -23,6 +23,7 @@ export default defineConfig(({ mode }) => {
     rmSync('dist-electron', { recursive: true, force: true })
 
   return {
+    base: "/icones",
     plugins: [
       isElectron && electron([
         {
